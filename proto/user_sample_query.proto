@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "common.proto";
+import "google/protobuf/wrappers.proto";
+package UserSample;
+
+service UserSampleQuery {
+    rpc GetSample(GetSampleRequest) returns (CommonResult);
+    rpc GetAllSamples(GetAllSamplesRequest) returns (CommonResult);
+}
+
+message GetSampleRequest{
+    optional google.protobuf.Int32Value Id = 1;
+}
+message GetAllSamplesRequest {
+	optional SkipTakeOption SkipTakeOption = 1;
+	optional PagingOption PagingOption = 2;
+}
+
