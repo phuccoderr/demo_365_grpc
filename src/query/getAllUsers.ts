@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
-import { clientUser } from '../api/user-proto'
-import { PagingOption, SkipTakeOption } from '../proto/common_pb'
-import { GetAllSamplesRequest } from '../proto/user_sample_query_pb'
-import { Int32Value } from 'google-protobuf/google/protobuf/wrappers_pb'
-import { RessponseCommon } from '../types/response.type'
-import { User } from '../types/user.type'
-import { Pagination } from '../types/pagination.type'
+import { useQuery } from "@tanstack/react-query"
+import { clientUser } from "../api/user-proto"
+import { PagingOption, SkipTakeOption } from "../proto/common_pb"
+import { GetAllSamplesRequest } from "../proto/user_sample_query_pb"
+import { Int32Value } from "google-protobuf/google/protobuf/wrappers_pb"
+import { RessponseCommon } from "../types/response.type"
+import { User } from "../types/user.type"
+import { Pagination } from "../types/pagination.type"
 
 export const getAllUsers = (body: {
   skip: number
@@ -27,21 +27,19 @@ export const getAllUsers = (body: {
   request.setPagingoption(pagination)
 
   return useQuery<Pagination<User>>({
-    queryKey: ['users'],
+    queryKey: ["users"],
     queryFn: async () => {
-      return await new Promise((resolve, reject) => {
-        query.getAllSamples(request, {}, (err, response) => {
-          if (err) reject(err)
-
-          const body = response.toObject() as unknown as RessponseCommon
-
-          if (body.statuscode === 200) {
-            resolve(JSON.parse(body.data ?? '') as Pagination<User>)
-          } else {
-            reject(body)
-          }
+      try {
+        const response = await query.getAllSamples(request, {
+          "custom-header-2": "value2",
         })
-      })
+
+        const body = response.toObject() as unknown as RessponseCommon
+
+        return JSON.parse(body.data ?? "") as Pagination<User>
+      } catch (err) {
+        return err
+      }
     },
   })
 }

@@ -12,7 +12,6 @@ const App = () => {
   const [idUser, setIdUser] = useState<number>(0)
   const [titleInput, setTitleInput] = useState<string>('')
   const [descriptionInput, setDescriptionInput] = useState<string>('')
-
   // GET ALL
   const { data: listUsers } = getAllUsers({
     pageNumber: 1,

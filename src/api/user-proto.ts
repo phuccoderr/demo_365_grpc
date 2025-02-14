@@ -1,10 +1,11 @@
-import { UserSampleQueryClient } from './../proto/user_sample_query_grpc_web_pb'
-import { UserSampleCommandClient } from './../proto/user_sample_command_grpc_web_pb'
+import { UserSampleCommandClient } from "../proto/User_sample_commandServiceClientPb"
+import { UserSampleQueryClient } from "../proto/User_sample_queryServiceClientPb"
+import { opts } from "./grpc-client"
 
-const BASE_URL = 'https://external.365sharing.org/api/test'
+const BASE_URL = "https://external.365sharing.org/api/test"
 export const clientUser = () => {
-  const query = new UserSampleQueryClient(BASE_URL)
-  const command = new UserSampleCommandClient(BASE_URL)
+  const query = new UserSampleQueryClient(BASE_URL, null, opts)
+  const command = new UserSampleCommandClient(BASE_URL, null, opts)
 
   return { query, command }
 }
