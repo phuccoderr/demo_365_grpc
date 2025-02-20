@@ -1,5 +1,5 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import Forbidened from "./403"
 
 interface AuthenProps {
   children?: React.ReactNode
@@ -8,9 +8,8 @@ interface AuthenProps {
 
 const Authen: React.FC<AuthenProps> = ({ allowedRoles, children }) => {
   const fakeRoles = "user"
-  const navigate = useNavigate()
   if (!allowedRoles.includes(fakeRoles)) {
-    navigate("/403")
+    return <Forbidened />
   }
 
   return children
