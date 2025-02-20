@@ -1,6 +1,8 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ESLintWebpackPlugin = require("eslint-webpack-plugin");
+const path = require("path")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const ESLintWebpackPlugin = require("eslint-webpack-plugin")
+const { library } = require("webpack")
+const { type } = require("os")
 
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
@@ -35,6 +37,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "..", "./build"),
     filename: "bundle.js",
+    publicPath: "/",
+    library: {
+      name: "grpc",
+      type: "umd",
+    },
   },
   // dont need dev because common is both dev and prod
   // mode: "development",
@@ -47,4 +54,4 @@ module.exports = {
       emitWarning: true,
     }),
   ],
-};
+}

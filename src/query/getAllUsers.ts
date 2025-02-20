@@ -3,9 +3,9 @@ import { clientUser } from "../api/user-proto"
 import { PagingOption, SkipTakeOption } from "../proto/common_pb"
 import { GetAllSamplesRequest } from "../proto/user_sample_query_pb"
 import { Int32Value } from "google-protobuf/google/protobuf/wrappers_pb"
-import { RessponseCommon } from "../types/response.type"
 import { User } from "../types/user.type"
 import { Pagination } from "../types/pagination.type"
+import { handleResponse } from "../api/util-client"
 
 export const getAllUsers = (body: {
   skip: number
@@ -29,17 +29,27 @@ export const getAllUsers = (body: {
   return useQuery<Pagination<User>>({
     queryKey: ["users"],
     queryFn: async () => {
-      try {
-        const response = await query.getAllSamples(request, {
-          "custom-header-2": "value2",
-        })
+      const response = await query.getAllSamples(request, {
+        required: "false",
+      })
 
-        const body = response.toObject() as unknown as RessponseCommon
-
-        return JSON.parse(body.data ?? "") as Pagination<User>
-      } catch (err) {
-        return err
-      }
+      return handleResponse<Pagination<User>>(response)
     },
+    // placeholderData: {
+    //   Items: [
+    //     {
+    //       Id: 1,
+    //       Title: "",
+    //       Description: "",
+    //       DueDate: new Date().toISOString(),
+    //       CreatedAt: new Date().toISOString(),
+    //       UpdatedAt: new Date().toISOString(),
+    //     },
+    //   ],
+    //   TotalItems: 0,
+    //   PageNumber: 0,
+    //   PageSize: 0,
+    //   TotalPages: 0,
+    // },
   })
 }
