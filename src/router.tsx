@@ -6,6 +6,7 @@ import Authen from "./pages/Authen.tsx"
 import About from "./pages/About.tsx"
 import Admin from "./pages/Admin.tsx"
 import Home from "./pages/Home.tsx"
+import { productRoutes } from "./pages/products/index.tsx"
 
 const router = [
   // PRIVATE
@@ -25,10 +26,7 @@ const router = [
         <Admin />
       </Authen>
     ),
-    children: [
-      { path: "brand", element: <div>manage brand</div> },
-      { path: "products", element: <div>manage products</div> },
-    ],
+    children: [productRoutes],
   },
   // PUBLIC
   {

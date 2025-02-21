@@ -1,10 +1,6 @@
 import React, { useState } from "react"
-import { getAllUsers } from "../query/getAllUsers"
-import { getUser } from "../query/getUser"
-import { createUser } from "../query/createUser"
 import { useQueryClient } from "@tanstack/react-query"
-import { updateUser } from "../query/updateUser"
-import { deleteUser } from "../query/deleteUser"
+import { queryUsers } from "../query/user.query"
 
 const Home = () => {
   const queryClient = useQueryClient()
@@ -16,17 +12,12 @@ const Home = () => {
     data: listUsers,
     isLoading: getAllUsersLoading,
     error,
-  } = getAllUsers({
-    pageNumber: 1,
-    pageSize: 10,
-    skip: 0,
-    take: 10,
-  })
+  } = queryUsers.getAll({ skip: 0, take: 50, pageNumber: 1, pageSize: 50 })
 
   console.log("HomeError", error)
 
   // GET
-  const mutateGet = getUser()
+  const mutateGet = queryUsers.getOne()
   const handleGetUser = (id: number) => {
     mutateGet.mutate(
       { id },
@@ -45,7 +36,7 @@ const Home = () => {
   }
 
   // CREATE
-  const mutateCreate = createUser()
+  const mutateCreate = queryUsers.create()
   const handleCreate = () => {
     mutateCreate.mutate(
       {
@@ -67,7 +58,7 @@ const Home = () => {
   }
 
   // UPDATE
-  const mutateUpdate = updateUser()
+  const mutateUpdate = queryUsers.update()
   const handleUpdate = () => {
     mutateUpdate.mutate(
       {
@@ -86,7 +77,7 @@ const Home = () => {
   }
 
   // DELETE
-  const mutateDelete = deleteUser()
+  const mutateDelete = queryUsers.delete()
   const handleDelete = (id: number) => {
     mutateDelete.mutate(
       {
@@ -127,7 +118,7 @@ const Home = () => {
           placeholder="description"
         />
         <button
-          disabled={mutateCreate.isPending}
+          disabled={mutateCreate.isPending || mutateUpdate.isPending}
           onClick={idUser > 0 ? () => handleUpdate() : () => handleCreate()}
         >
           {" "}
@@ -143,7 +134,12 @@ const Home = () => {
             <span style={{ cursor: "pointer", backgroundColor: "#956721" }}>
               {user.Title}
             </span>
-            <button onClick={() => handleDelete(user.Id)}>Delete</button>
+            <button
+              disabled={mutateDelete.isPending}
+              onClick={() => handleDelete(user.Id)}
+            >
+              Delete
+            </button>
           </div>
         ))}
         {}
