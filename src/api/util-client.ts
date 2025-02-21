@@ -1,18 +1,15 @@
 import * as grpcWeb from "grpc-web"
 import { CommonResult } from "../proto/result_pb"
 export const checkToken = (request: grpcWeb.Request<any, any>) => {
-  if (request.getMetadata().required === "true") {
-    const token = ""
+  const token = ""
+  const tokenExpirationDate = new Date()
+  tokenExpirationDate.setMinutes(tokenExpirationDate.getMinutes() - 5)
 
-    // IF TOKEN NOT FOUND OR EXPIRED, DONT CALL SERVER
-    if (!token) throw new Error("unauthorized")
+  // IF TOKEN NOT FOUND OR EXPIRED, DONT CALL SERVER
+  if (!token) throw new Error("unauthorized")
+  if (new Date() > tokenExpirationDate) throw new Error("unauthorized")
 
-    const tokenExpirationDate = new Date()
-    tokenExpirationDate.setMinutes(tokenExpirationDate.getMinutes() - 5)
-    if (new Date() > tokenExpirationDate) throw new Error("unauthorized")
-
-    request.getMetadata().Authorization = `Bearer ${token}`
-  }
+  request.getMetadata().Authorization = `Bearer ${token}`
 }
 
 export const refreshToken = (

@@ -57,6 +57,12 @@ export const queryUsers = {
       mutationFn: async ({ id }: { id: number }) => clientUser.getUser({ id }),
     })
   },
+  get: (id: number) => {
+    return useQuery<User>({
+      queryKey: ["user", id],
+      queryFn: async () => clientUser.getUser({ id }),
+    })
+  },
   update: () => {
     return useMutation<
       RessponseCommon,

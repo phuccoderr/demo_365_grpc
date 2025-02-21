@@ -7,6 +7,9 @@ const Home = () => {
   const [idUser, setIdUser] = useState<number>(0)
   const [titleInput, setTitleInput] = useState<string>("")
   const [descriptionInput, setDescriptionInput] = useState<string>("")
+
+  // GET
+  const { data: user, isLoading: getOneLoading } = queryUsers.get(1)
   // GET ALL
   const {
     data: listUsers,
@@ -17,6 +20,10 @@ const Home = () => {
   console.log("HomeError", error)
 
   // GET
+  console.log("user", {
+    user,
+    getOneLoading,
+  })
   const mutateGet = queryUsers.getOne()
   const handleGetUser = (id: number) => {
     mutateGet.mutate(
