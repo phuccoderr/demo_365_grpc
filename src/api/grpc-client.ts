@@ -1,5 +1,5 @@
 import * as grpcWeb from "grpc-web"
-import { checkToken, refreshToken } from "./util-client"
+import { checkToken, refreshToken } from "../utils/api.util"
 
 class MyUnaryInterceptor implements grpcWeb.UnaryInterceptor<any, any> {
   async intercept(

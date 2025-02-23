@@ -1,18 +1,18 @@
 import React from "react"
-import Forbidened from "./403"
+import { Outlet } from "react-router-dom"
+import Forbidened from "./forbidened"
 
 interface AuthenProps {
-  children?: React.ReactNode
   allowedRoles: string
 }
 
-const Authen: React.FC<AuthenProps> = ({ allowedRoles, children }) => {
+const Authen: React.FC<AuthenProps> = ({ allowedRoles }) => {
   const fakeRoles = "user"
   if (!allowedRoles.includes(fakeRoles)) {
     return <Forbidened />
   }
 
-  return children
+  return <Outlet />
 }
 
 export default Authen

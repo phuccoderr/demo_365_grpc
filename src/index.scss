@@ -1,0 +1,140 @@
+:root {
+  --primary-color: #ff469e !important;
+  --primary-color-rgb: 255, 70, 158 !important;
+
+  --secondary-color: #ffe7f2 !important;
+  --secondary-color-rgb: 255, 225, 239 !important;
+
+  --violet-365-color: #c41c8b !important;
+
+  --black-color: #000000;
+  --white-color: #ffffff;
+  --body-color: #f9fafc;
+  --blue-color: #0056b3;
+  --pink-color-s1: #c41c8b;
+  --pink-color-s2: #e5166b;
+  --red-color-s1: #ed1b26;
+  --green-color: #13ab5d;
+  --green-color-s1: #2dca36;
+  --green-color-s2: #1f8b1e;
+  --green-color-s3: #146912;
+
+  --text-primary: #333333;
+  --text-secondary: #525252;
+  --text-third: #616161;
+  --text-fourth: #949494;
+  --border-primary: #e7e7f1;
+  --box-shadow-primary: 0 6px 12px rgba(30, 10, 58, 0.04);
+  --bg-input: #e5ebee;
+  --text-logo: #464646;
+  --gray-color-s1: #f2f2f2;
+
+  --max-width: 1450px;
+  --min-width: 1300px;
+  --sidebar-width: 320px;
+
+  --radiusLayout: 8px;
+  --radiusBox: 4px;
+
+  --padding-x-desktop: 4rem;
+  --padding-x-tablet: 3rem;
+  --padding-x-mobile: 0rem;
+  --padding-x-inner: 2rem;
+
+  --background-hover: #f0f0f0;
+
+  --font-family-primary: Segoe UI, Segoe UI Midlevel, sans-serif;
+  --font-family-secondary: Segoe UI, Segoe UI Midlevel, sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  line-height: 1.5;
+  font-family: Segoe UI, Segoe UI Midlevel, sans-serif;
+  // scroll-behavior: smooth;
+  // scrollbar-width: none;
+}
+
+input {
+  font-family: Segoe UI, Segoe UI Midlevel, sans-serif;
+}
+
+body {
+  font-size: 1.4rem;
+  font-weight: 400;
+  background-color: #f5f5f5;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+// Scrollbar style
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(202, 202, 202);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(168, 168, 168);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+textarea {
+  font-family: Segoe UI, Segoe UI Midlevel, sans-serif;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: var(--font-family-secondary);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+.fadeIn {
+  animation: fadeInAnimation 0.5s ease-in-out;
+}
+
+.fadeOut {
+  animation: fadeOutAnimation 0.5s ease-in-out;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutAnimation {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

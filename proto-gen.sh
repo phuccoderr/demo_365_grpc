@@ -1,4 +1,3 @@
-mkdir -p ./src/proto
-protoc -I=proto ./proto/*.proto \
-  --js_out=import_style=commonjs:./src/proto \
-  --grpc-web_out=import_style=typescript,mode=grpcwebtext:./src/proto
+protoc -I=./src/api/users/command user_sample_command.proto \
+  --js_out=import_style=commonjs:./src/api/users/command \
+  --grpc-web_out=import_style=typescript,mode=grpcwebtext:./src/api/users/command
